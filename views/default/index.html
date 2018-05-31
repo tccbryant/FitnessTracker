@@ -18,45 +18,51 @@
   <div id="vue-div" class="display:none">
     <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
 
-    <div class="container padded">
+      <div class="container">
+          <div class="my_profile">
+              <div>My Profile</div>
+              <div class="container">
+                  <div class="stats half">
+                      <div>Height:</div>
+                      <div>Weight:</div>
+                      <div>Current Plan</div>
+                  </div>
+                  <div class="profile_goals half">
+                      Goals: here are my current goals
+                  </div>
+              </div>
 
-      <div class="image_space threequarters">
-        <!-- Left part of the page -->
-        <div v-if="self_page">
-          <!-- Code to upload files, with control buttons -->
-          <div id="uploader_div" style="display:none">
-            Upload an image file: <input id="file_input" type="file" accept="image/jpeg">
-              Price of image: <input v-model="image_price">
-              <button v-on:click="upload_file">Submit</button>
           </div>
+          <div class="half my_plans">
+              <div>My Plans</div>
+              <div class="container">
+                  <div  class="plan_list"> <!-- v-for=not now" -->
+                      <div class="plan_description">
 
-          <button v-if="!is_uploading" v-on:click="open_uploader"><i class="fa fa-plus"></i></button>
-          <button v-if="is_uploading"  v-on:click="close_uploader">Cancel</button>
-        </div>
+                      </div>
+                      <div class="plan_info container">
+                          <div class="twothirds created_by"></div>
+                          <div class="third plan_buttons"></div> <!-- if user logged in -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="half followed_plans">
+              <div>Followed Plans</div>
+              <div class="container">
+                  <div  class="plan_list"> <!-- v-for=not now" -->
+                      <div class="plan_description">
 
-        <div class="image_container">
-          <!-- Put here the code to display the images -->
-          <ul class="container">
-            <li v-for="img in user_images" class="card lifted padded quarter">
-                <img v-bind:src="img.image_url" height="200px" width="200px" class="padded"/>
-            </li>
-          </ul>
-        </div>
+                      </div>
+                      <div class="plan_info container">
+                          <div class="twothirds created_by"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
 
-      <div class="user_space quarter right">
-        <!-- Right part of the page -->
-        <table class="fill" id="user_selector">
-          <tbody>
-            <tr v-for="user in users" v-on:click="set_user(user.id)" class="center">
-              <!-- This row is you; code for getting your own images, and for setting self_page -->
-              <td class="center"> ${user.first_name}</td>
-            </tr>
-            <!-- Then, one row for each person. -->
-          </tbody>
-        </table>
 
-      </div>
 
   </div>
 

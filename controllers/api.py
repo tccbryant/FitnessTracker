@@ -50,7 +50,8 @@ def get_users():
 @auth.requires_signature()
 def add_image():
     db.user_images.insert(
-        image_url=request.vars.image_url
+        image_url=request.vars.image_url,
+        image_price=request.vars.image_price
     )
 
 
