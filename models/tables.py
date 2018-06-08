@@ -24,12 +24,18 @@ db.define_table('profiles',
                 )
 
 db.define_table('fitness_plans',
-                Field('schedule', 'list:string'), #array of 'days' to hold the fitness schedule
+                Field('schedule', 'list:reference schedule_day'), #array of 'days' to hold the fitness schedule
                 Field('goals', 'text'), #creator's intention on creating the plan
                 Field('results', 'text'),  # expected results from plan
                 Field('feedback', 'text'),  # journal of progress and results from plan
                 Field('is_archived', 'boolean')  # whether or not the creator is still editing the plan
                 )
+
+db.define_table('schedule_day',
+                Field('title', 'text'),
+                Field('workouts', 'text'),
+                Field('meals', 'text'),
+                Field('misc', 'text'))
 
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)

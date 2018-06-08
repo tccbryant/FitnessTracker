@@ -1,5 +1,29 @@
 // This is the js for the default/index.html view.
 
+set_self >> 
+get_my_plans
+get_followed_plans
+get_all_plans
+get_5_plans
+get_20_plans
+edit_plan (called when plans are open).
+delete_plan (called when open or closed.)
+add_plan (called when no plans are open.)
+follow_plan (add plan id to db)
+set_plan_as_current
+archive_plan
+get_current (calls open plan on current.)
+open_plan
+add_day (adds a day into the plan schedule.)
+save_plan (edit the db and exit, call get_my_plan.)
+cancel_plan (exit)
+
+data:
+my_plans = []
+followed_plans = []
+all_plans = []
+self_id = []
+plan_days = []
 
 var app = function() {
 
