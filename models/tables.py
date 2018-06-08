@@ -19,15 +19,15 @@ db.define_table('profiles',
                 Field('height', 'float'),
                 Field('weight', 'float'),
                 Field('active_plan'), #current plan
-                Field('followed_plans'), #array of plans followed by user
-                Field('my_plans')  # the array of plans created by user
+                Field('followed_plans', 'list:reference fitness_plans'), #array of plans followed by user
+                Field('my_plans', 'list:reference fitness_plans')  # the array of plans created by user
                 )
 
 db.define_table('fitness_plans',
-                Field('schedule'), #array of 'days' to hold the fitness schedule
+                Field('schedule', 'list:string'), #array of 'days' to hold the fitness schedule
                 Field('goals', 'text'), #creator's intention on creating the plan
                 Field('results', 'text'),  # expected results from plan
-                Field('feedback'),  # journal of progress and results from plan
+                Field('feedback', 'text'),  # journal of progress and results from plan
                 Field('is_archived', 'boolean')  # whether or not the creator is still editing the plan
                 )
 
