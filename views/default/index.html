@@ -2,6 +2,61 @@
 
 {{block head}}
 
+<style>
+    .profile_screen {
+        padding: 20px;
+        padding-right: 20px;
+    }
+
+    .profile_title {
+        padding: 0px;
+        font-family: sans-serif;
+        text-align: center;
+    }
+
+    .my_profile {
+        border: solid black 1px;
+        border-radius: 15px;
+        margin-right: 20px;
+    }
+
+    .stats {
+        padding: 20px !important;
+    }
+
+    .stat {
+        padding: 5px;
+    }
+
+    .profile_goals {
+        padding: 20px !important;
+    }
+
+    .cur_plan {
+        padding: 5px;
+        border: solid black 1px;
+        border-radius: 5px;
+        fill: #26a69a;
+    }
+
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #000000;
+        margin: 1em 0;
+        padding: 0;
+    }
+
+    .plan_list_div {
+        padding: 20px;
+        border: solid black 1px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+</style>
+
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
     var images_url = "{{=URL('api', 'get_images')}}";
@@ -18,14 +73,15 @@
   <div id="vue-div" class="display:none">
     <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
 
-      <div class="container">
+      <div class="profile_screen container">
           <div class="my_profile">
-              <div>My Profile</div>
-              <div class="container">
+              <div class="profile_title"><h2>My Profile</h2></div>
+              <hr/>
+              <div class="info_block container center">
                   <div class="stats half">
-                      <div>Height:</div>
-                      <div>Weight:</div>
-                      <div>Current Plan</div>
+                      <div class="stat">Height:</div>
+                      <div class="stat">Weight:</div>
+                      <div class="center"><span class="cur_plan center">Current Plan</span></div>
                   </div>
                   <div class="profile_goals half">
                       Goals: here are my current goals
@@ -33,8 +89,8 @@
               </div>
 
           </div>
-          <div class="half my_plans">
-              <div>My Plans</div>
+          <div class="half plan_list_div">
+              <div class="center"><h5>My Plans</h5></div>
               <div class="container">
                   <div  class="plan_list"> <!-- v-for=not now" -->
                       <div class="plan_description">
@@ -47,8 +103,8 @@
                   </div>
               </div>
           </div>
-          <div class="half followed_plans">
-              <div>Followed Plans</div>
+          <div class="half plan_list_div">
+              <div class="center"><h5>Followed Plans</h5></div>
               <div class="container">
                   <div  class="plan_list"> <!-- v-for=not now" -->
                       <div class="plan_description">
@@ -61,7 +117,6 @@
               </div>
           </div>
       </div>
-
 
 
   </div>
