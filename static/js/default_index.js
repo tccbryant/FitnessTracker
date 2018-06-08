@@ -86,8 +86,8 @@ var app = function() {
         $.getJSON(get_my_plans_url,
             function(data) {
                 self.vue.my_plans = data.user_plans
-                //Dict of plan descriptions for populating
-                //Profile page.
+                //Array of Dict of plan descriptions 
+                //for populating profile page.
             }
         );
     }
@@ -95,7 +95,7 @@ var app = function() {
     self.get_followed_plans = function() {
         $.getJSON(get_followed_plans_url,
             function(data) {
-                
+                self.vue.followed_plans = d
             }
         );
     }
