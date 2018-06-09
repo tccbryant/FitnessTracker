@@ -15,6 +15,7 @@ def get_user_email():
 
 
 db.define_table('schedule_day',
+                Field('plan_id'),
                 Field('title', 'text'),
                 Field('workouts', 'text'),
                 Field('meals', 'text'),
@@ -36,9 +37,9 @@ db.define_table('profiles',
                 Field('user_id'),
                 Field('height', 'float', default=0),
                 Field('weight', 'float', default=0),
-                Field('active_plan', 'reference fitness_plans'), #current plan
-                Field('followed_plans', 'list:reference fitness_plans'), #array of plans followed by user
-                Field('my_plans', 'list:reference fitness_plans')  # the array of plans created by user
+                Field('active_plan', 'integer'), #current plan
+                Field('followed_plans', 'list:integer'), #array of plans followed by user
+                Field('my_plans', 'list:integer')  # the array of plans created by user
                 )
 
 

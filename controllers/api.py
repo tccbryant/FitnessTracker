@@ -64,6 +64,22 @@ def add_plan():
 
     return response.json(dict(plan=plan))
 
+
+def get_my_plans():
+    plans = db(int(db.fitness_plans.owner_id) == int(auth.user.id)).select()
+    my_plans = []
+
+    for plan in plans:
+        p = dict(
+            title=plan.title,
+            goals=plan.goals
+        )
+        my_plans.append(p)
+
+    return response.json(dict(my_plans=my_plans))
+
+
+
 #getallusers
 
 #getuser(id)

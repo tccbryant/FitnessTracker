@@ -66,6 +66,7 @@
     var get_profile_url = "{{=URL('api', 'get_profile', user_signature=True)}}";
     var edit_profile_url = "{{=URL('api', 'edit_profile', user_signature=True)}}";
     var add_plan_url = "{{=URL('api', 'add_plan', user_signature=True)}}";
+    var get_my_plans_url = "{{=URL('api', 'get_my_plans', user_signature=True)}}";
 </script>
 
 
@@ -107,12 +108,12 @@
               </div>
               <hr/>
               <div class="container">
-                  <div v-for="" class="plan_list"> <!-- v-for=not now" -->
+                  <div v-for="plan in my_plans" class="plan_list"> <!-- v-for=not now" -->
                       <div class="plan_description">
-
+                          <h7>${plan.title}</h7><br>
+                          ${plan.goals}
                       </div>
                       <div class="plan_info container">
-                          <div class="twothirds created_by"></div>
                           <div class="third plan_buttons"></div> <!-- if user logged in -->
                       </div>
                   </div>

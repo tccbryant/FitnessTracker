@@ -175,6 +175,16 @@ var app = function() {
 
     */
 
+    self.get_my_plans = function() {
+        $.getJSON(get_my_plans_url,
+            function(data) {
+                self.vue.my_plans=data.my_plans;
+                console.log(self.vue.my_plans);
+            }
+        );
+
+    };
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
@@ -197,12 +207,14 @@ var app = function() {
             add_plan: self.add_plan,
             edit_plan: self.edit_plan,
             adding_plan: self.adding_plan,
-            profile: self.profile
+            profile: self.profile,
+            get_my_plans: self.get_my_plans
         }
 
     });
 
     self.get_profile();
+    self.get_my_plans();
     
     $("#vue-div").show();
     return self;
