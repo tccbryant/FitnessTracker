@@ -10,72 +10,49 @@ def get_profile():
     profiles = db().select(db.profiles.ALL)
     profile = None
 
+    print auth.user.id
+
     for p in profiles:
-        if p.user_obj == db.auth_user:
+        if int(p.user_id) == int(auth.user.id):
+            if p.active_plan is None:
+                goals = "No active plan."
+                cur_plan = None
+            else:
+                goals = p.active_plan.goals
+                cur_plan = p.active_plan.id
             profile = dict(
                 height=p.height,
                 weight=p.weight,
-                goals=p.active_plan.goals,
-                cur_plan=p.active_plan.id
+                goals=goals,
+                cur_plan=cur_plan
             )
+
+    if profile is None:
+        newp = db.profiles.insert(
+            user_id=auth.user.id
+        )
+        profile = dict(
+            height=newp.height,
+            weight=newp.weight,
+            goals="No active plan.",
+            cur_plan=None
+        )
 
     return response.json(dict(profile=profile))
 
 
-def get_images():
-    user_images = []
-    rows = db().select(db.user_images.ALL)
+def edit_profile():
+    profiles = db().select(db.profiles.ALL)
 
-    for r in rows:
-        if str(r.created_by) == str(request.vars.user_id):
-            i = dict(
-                id=r.id,
-                created_by=r.created_by,
-                created_on=r.created_on,
-                image_url=r.image_url
+    print(request.vars.height)
+
+    for p in profiles:
+        if int(p.user_id) == int(auth.user.id):
+            p.update_record(
+                height=request.vars.height,
+                weight=request.vars.weight
             )
-            user_images.append(i)
 
-    return response.json(dict(user_images=user_images))
-
-
-def get_users():
-    if auth.is_logged_in():
-        users = []
-        rows = db(db.auth_user.id > 0).select()
-
-        u = dict(
-            id=auth.user.id,
-            first_name=auth.user.first_name,
-            last_name=auth.user.last_name
-        )
-        users.append(u)
-
-        for r in rows:
-            if r.id != auth.user.id:
-                u = dict(
-                    id=r.id,
-                    first_name=r.first_name,
-                    last_name=r.last_name
-                )
-                users.append(u)
-
-        return response.json(dict(users=users))
-
-
-@auth.requires_signature()
-def add_image():
-    db.user_images.insert(
-        image_url=request.vars.image_url,
-        image_price=request.vars.image_price
-    )
-
-
-def get_self_id():
-    if auth.is_logged_in():
-        return response.json(dict(id=auth.user.id))
-    else:
-        return response.json(dict(id=-1))
 
 #getallusers
 

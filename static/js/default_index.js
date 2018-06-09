@@ -1,5 +1,5 @@
 // This is the js for the default/index.html view.
-
+/*
 set_self >> 
 get_my_plans
 get_followed_plans
@@ -32,7 +32,7 @@ self_id = []
 
 plan_days = []
 
-
+*/
 var app = function() {
 
     var self = {};
@@ -53,7 +53,7 @@ var app = function() {
         $.getJSON(get_profile_url,
             function(data) {
                 self.vue.user_profile = data.profile;
-                self.vue.is_editting_profile = false;
+                self.vue.profile_loaded = true;
                 /*  Dict containing the Height,
                  *  Weight, Goals, of user,
                  *  as well as the current plan
@@ -64,12 +64,14 @@ var app = function() {
                  */
             }
         );
-    }
+    };
     
     self.edit_profile = function() {
-        $.POST(edit_profile_url,
+        console.log(self.vue.user_profile);
+        $.post(edit_profile_url,
             {
-                user_profile = self.vue.user_profile
+                height: self.vue.user_profile.height,
+                weight: self.vue.user_profile.weight
                 // Send changed values within user_profile dict
                 // to the DB. 
 
@@ -78,8 +80,9 @@ var app = function() {
                 //"cancel button" that calls "get_profile";
             }
         );
-    }
+    };
 
+    /*
     self.add_plan = function(){
 
     }
@@ -136,29 +139,29 @@ var app = function() {
     }
 
 
-
+    */
 
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            plan_is_open: false,
+            //plan_is_open: false,
             user_profile: null,
-            is_editting_profile: false,
-            self_id: null,
-            open_plan_id: null,
-            open_plan_obj: null,
+            open_plan: null,
             my_plans: [], /* dict with texts and archive bool for now. */
-            followed_plans: []
+            followed_plans: [],
+            profile_loaded: false
 
         },
         methods: {
-            get_profile: self.get_profile
+            get_profile: self.get_profile,
+            edit_profile: self.edit_profile,
         }
 
     });
 
+    self.get_profile();
     
     $("#vue-div").show();
     return self;
