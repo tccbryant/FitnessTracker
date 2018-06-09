@@ -103,6 +103,9 @@ var app = function() {
         self.vue.page = 'profile';
     };
 
+    self.viewing = function() {
+        self.vue.page = 'viewing';
+    };
 
     self.add_plan = function() {
 
@@ -126,68 +129,6 @@ var app = function() {
         self.get_my_plans();
     };
 
-    
-    self.edit_plan = function(plan_id) {
-        //HTML, call on edit_plan(my_plans[._idx].id), something like this.
-        self.vue.is_editing_plan = true; //open new page with plan editing.
-    }
-
-    self.save_plan = function(plan_id) {
-        self.vue.is_editing_plan = false;
-        self.vue.is_adding_plan = false;
-    }
-
-    /*
-    self.delete_plan = function(){
-
-    }
-
-    self.plan_arch_toggle = function(){
-
-    }
-
-    self.set_plan_current = function(){
-
-    }
-
-    self.get_current_plan = function() {
-        self.vue.open_plan_id = self.vue.user_profile.active_plan;
-        self.show_plan();
-    }
-
-    self.show_plan = function() {
-        $.getJSON(show_plan_url,
-            {
-                plan_id: self.vue.open_plan_id
-            },
-            function(data) {
-                self.vue.open_plan_obj = data.plan;
-                self.vue.plan_is_open = true;
-            }
-        )
-    }
-
-    self.get_my_plans = function() {
-        $.getJSON(get_my_plans_url,
-            function(data) {
-                self.vue.my_plans = data.user_plans
-                //Array of Dict of plan descriptions 
-                //for populating profile page.
-            }
-        );
-    }
-
-    self.get_followed_plans = function() {
-        $.getJSON(get_followed_plans_url,
-            function(data) {
-                self.vue.followed_plans = data.followed_plans
-            }
-        );
-    }
-
-
-    */
-
     self.get_my_plans = function() {
         $.getJSON(get_my_plans_url,
             function(data) {
@@ -196,6 +137,29 @@ var app = function() {
             }
         );
 
+    };
+
+    self.delete_plan = function(plan_id) {
+        $.post(delete_plan_url,
+            {
+                plan_id: plan_id
+            },
+            function() {
+                self.get_my_plans();
+            }
+        )
+    };
+
+    self.view_plan = function(plan_id) {
+        $.getJSON(view_plan_url,
+            {
+                plan_id: plan_id
+            },
+            function(data) {
+                self.vue.open_plan = data.plan;
+                self.viewing();
+            }
+        )
     };
 
     self.vue = new Vue({
@@ -207,7 +171,6 @@ var app = function() {
             page: 'default',
             user_profile: null,
             open_plan: null,
-            cur_edit: null, //array of size 1.
             my_plans: [], /* dict with texts and archive bool for now. */
             followed_plans: [],
             profile_loaded: false,
@@ -218,11 +181,13 @@ var app = function() {
             get_profile: self.get_profile,
             edit_profile: self.edit_profile,
             add_plan: self.add_plan,
-            edit_plan: self.edit_plan,
             adding_plan: self.adding_plan,
             profile: self.profile,
             get_my_plans: self.get_my_plans,
-            log_in: self.log_in
+            log_in: self.log_in,
+            delete_plans: self.delete_plan,
+            view_plan: self.view_plan,
+            viewing: self.viewing
         }
 
     });
