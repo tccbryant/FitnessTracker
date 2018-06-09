@@ -5,6 +5,12 @@ from gluon.utils import web2py_uuid
 
 # Here go your api methods.
 
+def add_plan():
+    new_plan = db.fitness_plans.insert()
+    np = dict(
+        id = new_plan.id
+    )
+    return response.json(dict(np=np))
 
 def get_profile():
     profiles = db().select(db.profiles.ALL)

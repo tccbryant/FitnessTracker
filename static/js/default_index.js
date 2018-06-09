@@ -82,15 +82,22 @@ var app = function() {
         );
     };
 
-    /*
+    
     self.add_plan = function(){
+        $.getJSON(add_plan_url,
+            function(data) {
+                self.vue.new_plan_id = data.np.id;
+            }
+        )
 
     }
 
-    self.edit_plan = function() {
-
+    
+    self.edit_plan = function(index) {
+        self.vue.is_editing_plan = true; //open new page with plan editing.
     }
 
+    /*
     self.delete_plan = function(){
 
     }
@@ -149,9 +156,12 @@ var app = function() {
             //plan_is_open: false,
             user_profile: null,
             open_plan: null,
+            new_plan_id: null,
             my_plans: [], /* dict with texts and archive bool for now. */
             followed_plans: [],
-            profile_loaded: false
+            profile_loaded: false,
+            is_adding_plan: false,
+            is_editing_plan: false
 
         },
         methods: {
