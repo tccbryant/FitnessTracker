@@ -80,6 +80,26 @@ var app = function() {
         );
     }
 
+    self.add_plan = function(){
+
+    }
+
+    self.edit_plan = function() {
+
+    }
+
+    self.delete_plan = function(){
+
+    }
+
+    self.plan_arch_toggle = function(){
+
+    }
+
+    self.set_plan_current = function(){
+
+    }
+
     self.get_current_plan = function() {
         self.vue.open_plan_id = self.vue.user_profile.active_plan;
         self.show_plan();
@@ -117,6 +137,7 @@ var app = function() {
 
 
 
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
@@ -128,7 +149,9 @@ var app = function() {
             self_id: null,
             open_plan_id: null,
             open_plan_obj: null,
-            my_plans: [] /* dict with texts and archive bool for now.
+            my_plans: [], /* dict with texts and archive bool for now. */
+            followed_plans: []
+
         },
         methods: {
             get_profile: self.get_profile
