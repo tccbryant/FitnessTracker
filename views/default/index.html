@@ -55,12 +55,17 @@
         margin-top: 20px;
     }
 
+    .my_plans {
+        text-align: right;
+    }
+
 </style>
 
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
     var get_profile_url = "{{=URL('api', 'get_profile', user_signature=True)}}";
     var edit_profile_url = "{{=URL('api', 'edit_profile', user_signature=True)}}";
+    var add_plan_url = "{{=URL('api', 'add_plan', user_signature=True)}}";
 </script>
 
 
@@ -92,7 +97,14 @@
 
           </div>
           <div class="half plan_list_div">
-              <div class="center"><h5>My Plans</h5></div>
+              <div class="container">
+                  <div class="my_plans half">
+                      <h5>My Plans</h5>
+                  </div>
+                  <div style="padding-top: 12px" class="third">
+                      <button class="btn rounded" v-on:click="add_plan"><i class="fa fa-plus"></i></button>
+                  </div>
+              </div>
               <div class="container">
                   <div  class="plan_list"> <!-- v-for=not now" -->
                       <div class="plan_description">
