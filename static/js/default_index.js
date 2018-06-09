@@ -84,17 +84,23 @@ var app = function() {
 
     
     self.add_plan = function(){
+        self.vue.is_adding_plan = true;
         $.getJSON(add_plan_url,
             function(data) {
-                self.vue.new_plan_id = data.np.id;
+                self.edit_plan(data.np.id);
             }
-        )
-
+        );
     }
 
     
-    self.edit_plan = function(index) {
+    self.edit_plan = function(plan_id) {
+        //HTML, call on edit_plan(my_plans[._idx].id), something like this.
         self.vue.is_editing_plan = true; //open new page with plan editing.
+    }
+
+    self.save_plan = function(plan_id) {
+        self.vue.is_editing_plan = false;
+        self.vue.is_adding_plan = false;
     }
 
     /*
@@ -156,17 +162,20 @@ var app = function() {
             //plan_is_open: false,
             user_profile: null,
             open_plan: null,
-            new_plan_id: null,
+            cur_edit: null, //array of size 1.
             my_plans: [], /* dict with texts and archive bool for now. */
             followed_plans: [],
             profile_loaded: false,
             is_adding_plan: false,
             is_editing_plan: false
+            
 
         },
         methods: {
             get_profile: self.get_profile,
             edit_profile: self.edit_profile,
+            add_plan: self.add_plan,
+            edit_plan: self.edit_plan
         }
 
     });
