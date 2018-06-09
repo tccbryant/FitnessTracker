@@ -59,10 +59,7 @@
 
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
-    var images_url = "{{=URL('api', 'get_images')}}";
-    var users_url = "{{=URL('api', 'get_users')}}";
-    var add_image_url = "{{=URL('api', 'add_image', user_signature=True)}}";
-    var self_url = "{{=URL('api', 'get_self_id', user_signature=True)}}";
+    var get_profile_url = "{{=URL('api', 'get_profile', user_signature=True)}}";
 </script>
 
 

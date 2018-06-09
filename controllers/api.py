@@ -6,6 +6,22 @@ from gluon.utils import web2py_uuid
 # Here go your api methods.
 
 
+def get_profile():
+    profiles = db().select(db.profiles.ALL)
+    profile = None
+
+    for p in profiles:
+        if p.user_obj == db.auth_user:
+            profile = dict(
+                height=p.height,
+                weight=p.weight,
+                goals=p.active_plan.goals,
+                cur_plan=p.active_plan.id
+            )
+
+    return response.json(dict(profile=profile))
+
+
 def get_images():
     user_images = []
     rows = db().select(db.user_images.ALL)
