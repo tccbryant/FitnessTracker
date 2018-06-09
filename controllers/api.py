@@ -66,7 +66,7 @@ def add_plan():
 
 
 def get_my_plans():
-    plans = db(int(db.fitness_plans.owner_id) == int(auth.user.id)).select()
+    plans = db(db.fitness_plans.owner_id == auth.user.id).select()
     my_plans = []
 
     for plan in plans:
