@@ -4,6 +4,13 @@ import tempfile
 from gluon.utils import web2py_uuid
 
 # Here go your api methods.
+def log_in():
+    if auth.is_logged_in():
+        return response.json(dict(logged_in = True))
+    else:
+        return response.json(dict(logged_in = False))
+
+
 
 def get_profile():
     profiles = db().select(db.profiles.ALL)

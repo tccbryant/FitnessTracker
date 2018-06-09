@@ -49,6 +49,18 @@ var app = function() {
     // Enumerates an array.
     var enumerate = function(v) { var k=0; return v.map(function(e) {e._idx = k++;});};
 
+    self.log_in = function() {
+        $.getJSON(log_in_url,
+            function(data) {
+                if (data.logged_in) {
+                    self.vue.page = 'profile';
+                    self.get_profile();
+                    self.get_my_plans();
+                }
+            }
+        );
+    }
+    
     self.get_profile = function() {
         $.getJSON(get_profile_url,
             function(data) {
@@ -191,7 +203,7 @@ var app = function() {
         unsafeDelimiters: ['!{', '}'],
         data: {
             //plan_is_open: false,
-            page: 'profile',
+            page: 'default',
             user_profile: null,
             open_plan: null,
             cur_edit: null, //array of size 1.
@@ -208,14 +220,13 @@ var app = function() {
             edit_plan: self.edit_plan,
             adding_plan: self.adding_plan,
             profile: self.profile,
-            get_my_plans: self.get_my_plans
+            get_my_plans: self.get_my_plans,
+            log_in: self.log_in
         }
 
     });
+    self.log_in();
 
-    self.get_profile();
-    self.get_my_plans();
-    
     $("#vue-div").show();
     return self;
 };
