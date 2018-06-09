@@ -22,6 +22,7 @@ db.define_table('schedule_day',
 
 
 db.define_table('fitness_plans',
+                Field('owner_id'),
                 Field('schedule', 'list:reference schedule_day'), #array of 'days' to hold the fitness schedule
                 Field('title', 'text'),
                 Field('goals', 'text', default=""), #creator's intention on creating the plan

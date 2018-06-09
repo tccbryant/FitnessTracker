@@ -76,7 +76,7 @@
   <div id="vue-div" class="display:none">
     <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
 
-      <div class="profile_screen container">
+      <div v-if="page=='profile'" class="profile_screen container">
           <div class="my_profile">
               <div class="profile_title"><h2>My Profile</h2></div>
               <hr/>
@@ -102,11 +102,12 @@
                       <h5>My Plans</h5>
                   </div>
                   <div style="padding-top: 12px" class="third">
-                      <button class="btn rounded" v-on:click="add_plan"><i class="fa fa-plus"></i></button>
+                      <button class="btn rounded" v-on:click="adding_plan"><i class="fa fa-plus"></i></button>
                   </div>
               </div>
+              <hr/>
               <div class="container">
-                  <div  class="plan_list"> <!-- v-for=not now" -->
+                  <div v-for="" class="plan_list"> <!-- v-for=not now" -->
                       <div class="plan_description">
 
                       </div>
@@ -130,6 +131,19 @@
                   </div>
               </div>
           </div>
+      </div>
+
+      <div v-if="page=='adding'" class="container">
+          Title
+          <input id="title_input" type="text">
+          Goals:
+          <input id="goals_input" type="text">
+          Expected results:
+          <input id="results_input" type="text">
+          Feedback:
+          <input id="feedback_input" type="text">
+          <button class="btn rounded" v-on:click="profile">Cancel</button>
+          <button class="btn rounded" v-on:click="add_plan">Submit</button>
       </div>
 
 

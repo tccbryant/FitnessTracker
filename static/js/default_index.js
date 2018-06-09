@@ -82,15 +82,36 @@ var app = function() {
         );
     };
 
-    
-    self.add_plan = function(){
-        self.vue.is_adding_plan = true;
-        $.getJSON(add_plan_url,
+
+    self.adding_plan = function() {
+        self.vue.page = 'adding';
+    };
+
+    self.profile = function() {
+        self.vue.page = 'profile';
+    };
+
+
+    self.add_plan = function() {
+
+        var title = $('input#title_input').val();
+        var goals = $('input#goals_input').val();
+        var results = $('input#results_input').val();
+        var feedback = $('input#feedback_input').val();
+
+        $.post(add_plan_url,
+            {
+                title: title,
+                goals: goals,
+                results: results,
+                feedback: feedback
+            },
             function(data) {
-                self.edit_plan(data.np.id);
+                console.log(data);
             }
         );
-    }
+        self.profile();
+    };
 
     
     self.edit_plan = function(plan_id) {
@@ -160,14 +181,13 @@ var app = function() {
         unsafeDelimiters: ['!{', '}'],
         data: {
             //plan_is_open: false,
+            page: 'profile',
             user_profile: null,
             open_plan: null,
             cur_edit: null, //array of size 1.
             my_plans: [], /* dict with texts and archive bool for now. */
             followed_plans: [],
             profile_loaded: false,
-            is_adding_plan: false,
-            is_editing_plan: false
             
 
         },
@@ -175,7 +195,9 @@ var app = function() {
             get_profile: self.get_profile,
             edit_profile: self.edit_profile,
             add_plan: self.add_plan,
-            edit_plan: self.edit_plan
+            edit_plan: self.edit_plan,
+            adding_plan: self.adding_plan,
+            profile: self.profile
         }
 
     });
