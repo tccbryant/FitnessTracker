@@ -52,7 +52,8 @@ var app = function() {
     self.get_profile = function() {
         $.getJSON(get_profile_url,
             function(data) {
-                user_profile = data.profile;
+                self.vue.user_profile = data.profile;
+                self.vue.is_editting_profile = false;
                 /*  Dict containing the Height,
                  *  Weight, Goals, of user,
                  *  as well as the current plan
@@ -61,6 +62,20 @@ var app = function() {
                  *  Convert active plan to id in
                  *  the api for this function.
                  */
+            }
+        );
+    }
+    
+    self.edit_profile = function() {
+        $.POST(edit_profile_url,
+            {
+                user_profile = self.vue.user_profile
+                // Send changed values within user_profile dict
+                // to the DB. 
+
+                // In HTML, make an edit button. If editting, show
+                // a button that calls this function and another
+                //"cancel button" that calls "get_profile";
             }
         );
     }
@@ -95,7 +110,7 @@ var app = function() {
     self.get_followed_plans = function() {
         $.getJSON(get_followed_plans_url,
             function(data) {
-                self.vue.followed_plans = d
+                self.vue.followed_plans = data.followed_plans
             }
         );
     }
@@ -109,6 +124,7 @@ var app = function() {
         data: {
             plan_is_open: false,
             user_profile: null,
+            is_editting_profile: false,
             self_id: null,
             open_plan_id: null,
             open_plan_obj: null,
