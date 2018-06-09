@@ -59,6 +59,12 @@
         text-align: right;
     }
 
+    .single_plan{
+        border: solid black 1px;
+        border-radius: 15px;
+        margin-right: 20px;
+    }
+
 </style>
 
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
@@ -77,80 +83,82 @@
 
   <div id="vue-div" class="display:none">
     <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
-
-      <div v-if="page=='profile'" class="profile_screen container">
-          <div class="my_profile">
-              <div class="profile_title"><h2>My Profile</h2></div>
-              <hr/>
-              <div v-if="profile_loaded" class="info_block container center">
-                  <div class="stats half">
-                      <div class="stat">
-                          Height: <input v-model="user_profile.height" v-on:blur="edit_profile" type="number">
-                      </div>
-                      <div class="stat">
-                          Weight: <input v-model="user_profile.weight" v-on:blur="edit_profile" type="number">
-                      </div>
-                      <div class="center"><span class="cur_plan center">Current Plan</span></div>
-                  </div>
-                  <div class="profile_goals half">
+        <div v-if="page=='profile'" class="profile_screen container">
+            <div class="my_profile">
+                <div class="profile_title"><h2>My Profile</h2></div>
+                <hr/>
+                <div v-if="profile_loaded" class="info_block container center">
+                    <div class="stats half">
+                        <div class="stat">
+                            Height: <input v-model="user_profile.height" v-on:blur="edit_profile" type="number">
+                        </div>
+                        <div class="stat">
+                            Weight: <input v-model="user_profile.weight" v-on:blur="edit_profile" type="number">
+                        </div>
+                        <div class="center"><span class="cur_plan center">Current Plan</span></div>
+                    </div>
+                    <div class="profile_goals half">
                       Goals: ${user_profile.goals}
-                  </div>
-              </div>
+                    </div>
+                </div>
+            </div>
+            <div class="half padded container">
+                <div class="plan_list_div">
+                    <div class="container">
+                        <div class="my_plans half">
+                            <h5>My Plans</h5>
+                        </div>
+                        <div style="padding-top: 12px" class="third">
+                            <button class="btn rounded" v-on:click="adding_plan"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="container">
+                        <div v-for="plan in my_plans"> <!-- v-for=not now" -->
+                            <div class="plan_list">
+                                <div class="single_plan plan_description container padded">
+                                    <div class="container threequarters">
+                                        <h6>${plan.title}</h6>
+                                    </div>  
+                                    <div class="plan_info container quarter padded">
+                                    </div>
+                                    <div class="container">${plan.goals}</div>
+                                </div>
+                                <h6> </h6>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="half padded container">
+                <div class="plan_list_div">
+                    <div class="center"><h5>Followed Plans</h5></div>
+                    <div class="container">
+                        <div  class="plan_list"> <!-- v-for=not now" -->
+                            <div class="plan_description">  
+                            </div>
+                            <div class="plan_info container">
+                                <div class="twothirds created_by"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-          </div>
-          <div class="half plan_list_div">
-              <div class="container">
-                  <div class="my_plans half">
-                      <h5>My Plans</h5>
-                  </div>
-                  <div style="padding-top: 12px" class="third">
-                      <button class="btn rounded" v-on:click="adding_plan"><i class="fa fa-plus"></i></button>
-                  </div>
-              </div>
-              <hr/>
-              <div class="container">
-                  <div v-for="plan in my_plans" class="plan_list"> <!-- v-for=not now" -->
-                      <div class="plan_description">
-                          <h6>${plan.title}</h6><br>
-                          ${plan.goals}
-                      </div>
-                      <div class="plan_info container">
-                          <div class="third plan_buttons"></div> <!-- if user logged in -->
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="half plan_list_div">
-              <div class="center"><h5>Followed Plans</h5></div>
-              <div class="container">
-                  <div  class="plan_list"> <!-- v-for=not now" -->
-                      <div class="plan_description">
-
-                      </div>
-                      <div class="plan_info container">
-                          <div class="twothirds created_by"></div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <div v-if="page=='adding'" class="container">
-          Title
-          <input id="title_input" type="text">
-          Goals:
-          <input id="goals_input" type="text">
-          Expected results:
-          <input id="results_input" type="text">
-          Feedback:
-          <input id="feedback_input" type="text">
-          <button class="btn rounded" v-on:click="profile">Cancel</button>
-          <button class="btn rounded" v-on:click="add_plan">Submit</button>
-      </div>
-
-
-  </div>
-
+        <div v-if="page=='adding'" class="container">
+            Title
+            <input id="title_input" type="text">
+            Goals:
+            <input id="goals_input" type="text">
+            Expected results:
+            <input id="results_input" type="text">
+            Feedback:
+            <input id="feedback_input" type="text">
+            <button class="btn rounded" v-on:click="profile">Cancel</button>
+            <button class="btn rounded" v-on:click="add_plan">Submit</button>
+        </div>
+    </div>
 </div>
 
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>

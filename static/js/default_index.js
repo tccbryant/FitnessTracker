@@ -123,6 +123,7 @@ var app = function() {
             }
         );
         self.profile();
+        self.get_my_plans();
     };
 
     
