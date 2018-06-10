@@ -153,7 +153,6 @@
                     </div>
                 </div>
             </div>
-            b
             <div class="half padded container">
                 <div class="plan_list_div">
                     <div class="container">
@@ -174,10 +173,10 @@
                                     </div>  
                                     <div class="button_bar container third right">
                                         <div class="third">
-                                            <button v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
+                                            <button class="btn rounded" v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
                                         </div>
                                         <div class="third">
-                                            <button v-on:click="delete_plan(plan.id)"><i class="fa fa-eye-slash"></i>Unfollow</button>
+                                            <button class="btn rounded" v-on:click="delete_plan(plan.id)"><i class="fa fa-eye-slash"></i>Unfollow</button>
                                         </div>
                                     </div>
                                     <div class="container">${plan.goals}</div>
@@ -204,36 +203,40 @@
             <div class="half plan_right">
                 <div>
                     Sunday
-                    <input id="Sunday_input" type="text">
+                    <!--<textarea class="textarea" placeholder="Message" v-model="form.message"></textarea>-->
+                    <input id="Sunday_input" type="textarea">
                 </div>
                 <div>
                     Monday
-                    <input id="Monday_input" type="text">
+                    <input id="Monday_input" type="textarea">
                 </div>
                 <div>
                     Tuesday
-                    <input id="Tuesday_input" type="text">
+                    <input id="Tuesday_input" type="textarea">
                 </div>
                 <div>
                     Wednesday
-                    <input id="Wednesday_input" type="text">
+                    <input id="Wednesday_input" type="textarea">
                 </div>
                 <div>
                     Thursday
-                    <input id="Thursday_input" type="text">
+                    <input id="Thursday_input" type="textarea">
                 </div>
                 <div>
                     Friday
-                    <input id="Friday_input" type="text">
+                    <input id="Friday_input" type="textarea">
                 </div>
                 <div>
                     Saturday
-                    <input id="Saturday_input" type="text">
+                    <input id="Saturday_input" type="textarea">
                 </div>
             </div>
         </div>
 
         <div v-if="page == 'editing'" class="container">
+            <div class="half plan_left">
+                <!--Insert V-Models Here?-->
+            </div>
             <button class="btn rounded" v-on:click="profile">Cancel</button>
         </div>
 
@@ -280,7 +283,30 @@
         </div>
 
         <div v-if="page == 'browsing'" class="container">
+            <div class="plan_list_div">
+                <div class="container">
+                    <div v-for="plan in my_plans"> <!-- v-for=not now" -->
+                        <div class="plan_list">
+                            <div class="single_plan plan_description container padded">
+                                <div class="container twothirds">
+                                    <h6>${plan.title}</h6>
+                                </div>  
+                                <div class="button_bar container third right">
+                                    <div class="third">
+                                        <button class="btn rounded" v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
+                                    </div>
+                                    <div class="third">
+                                        <button class="btn rounded" v-on:click=""><i class="fa fa-heart "></i>Follow</button>
+                                    </div>
+                                </div>
+                                <div class="container">${plan.goals}</div>
+                            </div>
+                            <h6> </h6>    
+                        </div>
+                    </div>
+                </div>
             <button class="btn rounded" v-on:click="profile">Exit</button>
+            <!--making is browsing bool so that when you return from viewing, you go back to browsing.-->
         </div>
 
     </div>
