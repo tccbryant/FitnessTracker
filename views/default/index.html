@@ -198,6 +198,8 @@
                 <input id="goals_input" type="text">
                 Expected results:
                 <input id="results_input" type="text">
+                <button class="btn rounded" v-on:click="profile">Cancel</button>
+                <button class="btn rounded" v-on:click="add_plan">Submit</button>
             </div>
             <div class="half plan_right">
                 <div>
@@ -229,8 +231,6 @@
                     <input id="Saturday_input" type="text">
                 </div>
             </div>
-            <button class="btn rounded" v-on:click="profile">Cancel</button>
-            <button class="btn rounded" v-on:click="add_plan">Submit</button>
         </div>
 
         <div v-if="page == 'editing'" class="container">
@@ -244,6 +244,8 @@
                 ${open_plan.goals}
                 <h4>Expected Results</h4>
                 ${open_plan.results}
+                <br>
+                <button class="btn rounded" v-on:click="profile">Exit</button>
             </div>
             <div class="half plan_right">
                 <div>
@@ -275,7 +277,6 @@
                     ${open_plan.Saturday}
                 </div>
             </div>
-            <button class="btn rounded" v-on:click="profile">Exit</button>
         </div>
 
         <div v-if="page == 'browsing'" class="container">
