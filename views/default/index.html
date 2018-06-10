@@ -65,6 +65,10 @@
         margin-right: 20px;
     }
 
+    .button_bar{
+        margin-top: 5px;
+    }
+
 </style>
 
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
@@ -121,10 +125,20 @@
                         <div v-for="plan in my_plans"> <!-- v-for=not now" -->
                             <div class="plan_list">
                                 <div class="single_plan plan_description container padded">
-                                    <div class="container threequarters">
+                                    <div class="container twothirds">
                                         <h6>${plan.title}</h6>
                                     </div>  
-                                    <div class="plan_info container quarter padded">
+                                    <div class="button_bar container third right
+                                    ">
+                                        <div class="padded third">
+                                            <button v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i></button>
+                                        </div>
+                                        <div class="padded third">
+                                            <button v-on:click="edit_plan(plan.id)"><i class="fa fa-edit"></i></button>
+                                        </div>
+                                        <div class="padded third">
+                                            <button v-on:click="delete_plan(plan.id)"><i class="fa fa-trash"></i></button>
+                                        </div>
                                     </div>
                                     <div class="container">${plan.goals}</div>
                                 </div>
