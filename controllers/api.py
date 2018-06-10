@@ -126,10 +126,12 @@ def browse():
     plans = db().select(db.fitness_plans.ALL)
     browse_plans = []
 
+    print(profile)
+
     for plan in plans:
-        is_followed = false
-        if (profile.followed_plans.count(plan.id) > 0):
-            is_followed = true
+        is_followed = False
+        if profile.followed_plans.count(plan.id) > 0:
+            is_followed = True
         user = db(db.auth_user.id == plan.owner_id).select().first()
         
         p = dict(
