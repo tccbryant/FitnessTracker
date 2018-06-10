@@ -162,6 +162,14 @@ var app = function() {
         )
     };
 
+    self.browse = function() {
+        $.getJSON(browse_url,
+            function(data) {
+                self.vue.browse_plans = data.plans;
+            }
+        )
+    };
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
@@ -173,6 +181,7 @@ var app = function() {
             open_plan: null,
             my_plans: [], /* dict with texts and archive bool for now. */
             followed_plans: [],
+            browse_plans: [],
             profile_loaded: false,
             
 
@@ -187,7 +196,8 @@ var app = function() {
             log_in: self.log_in,
             delete_plans: self.delete_plan,
             view_plan: self.view_plan,
-            viewing: self.viewing
+            viewing: self.viewing,
+            browse: self.browse
         }
 
     });

@@ -74,6 +74,9 @@
     var add_plan_url = "{{=URL('api', 'add_plan', user_signature=True)}}";
     var get_my_plans_url = "{{=URL('api', 'get_my_plans', user_signature=True)}}";
     var log_in_url = "{{=URL('api', 'log_in')}}";
+    var delete_plan_url = "{{=URL('api', 'delete_plan', user_signature=True)}}";
+    var view_plan_url = "{{=URL('api', 'view_plan')}}";
+    var browse_url = "{{=URL('api', 'browse')}}";
 </script>
 
 
@@ -82,7 +85,8 @@
 <div class="main_content">
 
   <div id="vue-div" class="display:none">
-    <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+      <button class="btn rounded">Browse</button>
+
         <div v-if="page=='profile'" class="profile_screen container">
             <div class="my_profile">
                 <div class="profile_title"><h2>My Profile</h2></div>

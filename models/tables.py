@@ -39,7 +39,6 @@ db.define_table('profiles',
                 Field('weight', 'float', default=0),
                 Field('active_plan', 'integer'), #current plan
                 Field('followed_plans', 'list:integer'), #array of plans followed by user
-                Field('my_plans', 'list:integer')  # the array of plans created by user
                 )
 
 

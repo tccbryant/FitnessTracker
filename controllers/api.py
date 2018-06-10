@@ -106,6 +106,21 @@ def view_plan():
     return response.json(dict(plan=p))
 
 
+def browse():
+    plans = db().select(db.fitness_plans.ALL)
+    browse_plans = []
+
+    for plan in plans:
+        user = db(db.auth_user.id == plan.owner_id).select()
+        p = dict(
+            first_name=user.first_name,
+            last_name=user.last_name,
+            title=plan.title,
+            goals=plan.goals
+        )
+        browse_plans.append(p)
+
+    return response.json(dict(browse_plans=browse_plans))
 
 #getallusers
 
