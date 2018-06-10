@@ -136,7 +136,6 @@ var app = function() {
                 console.log(self.vue.my_plans);
             }
         );
-
     };
 
     self.delete_plan = function(plan_id) {
@@ -156,7 +155,7 @@ var app = function() {
                 plan_id: plan_id
             },
             function(data) {
-                self.vue.open_plan = data.plan;
+                self.vue.open_plan = data.open_plan;
                 self.viewing();
             }
         )
@@ -165,9 +164,42 @@ var app = function() {
     self.browse = function() {
         $.getJSON(browse_url,
             function(data) {
-                self.vue.browse_plans = data.plans;
+                self.vue.browse_plans = data.browse_plans;
             }
         )
+    };
+
+    self.edit_plan = function(plan_id) {
+        $.getJSON(view_plan_url,
+            {
+                plan_id: plan_id
+            },
+            function(data) {
+                self.vue.open_plan = data.open_plan;
+                self.vue.page = 'editing';
+            })
+    };
+
+    self.edit_complete = function() {
+        var title = $('input#editing_title').val();
+        var goals = $('input#editing_goals').val();
+        var results = $('input#editing_results').val();
+        var feedback = $('input#editing_feedback').val();
+
+        $.post(edit_plan_url,
+            {
+                plan_id: self.vue.open_plan.id,
+                title: title,
+                goals: goals,
+                results: results,
+                feedback: feedback
+            },
+            function(data) {
+
+            }
+        );
+        self.profile();
+        self.get_my_plans();
     };
 
     self.vue = new Vue({
@@ -197,7 +229,9 @@ var app = function() {
             delete_plans: self.delete_plan,
             view_plan: self.view_plan,
             viewing: self.viewing,
-            browse: self.browse
+            browse: self.browse,
+            edit_plan: self.edit_plan,
+            edit_complete: self.edit_complete
         }
 
     });

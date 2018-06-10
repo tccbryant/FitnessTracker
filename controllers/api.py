@@ -94,16 +94,17 @@ def view_plan():
     plan = db(db.fitness_plans.id == request.vars.plan_id).select()
     user = db(db.auth_user.id == plan.owner_id).select()
 
-    p = dict(
+    open_plan = dict(
         first_name=user.first_name,
         last_name=user.last_name,
+        id=plan.id,
         title=plan.title,
         goals=plan.goals,
         results=plan.results,
         feedback=plan.feedback
     )
 
-    return response.json(dict(plan=p))
+    return response.json(dict(open_plan=open_plan))
 
 
 def browse():
