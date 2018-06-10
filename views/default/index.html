@@ -87,10 +87,7 @@
 {{end}}
 
 <div class="main_content">
-
-  <div id="vue-div" class="display:none">
-      <button v-if="page != 'browsing'" v-on:click="browse" class="btn rounded">Browse</button>
-
+    <div id="vue-div" class="display:none">
         <div v-if="page=='profile'" class="profile_screen container">
             <div class="my_profile">
                 <div class="profile_title"><h2>My Profile</h2></div>
@@ -125,18 +122,18 @@
                         <div v-for="plan in my_plans"> <!-- v-for=not now" -->
                             <div class="plan_list">
                                 <div class="single_plan plan_description container padded">
-                                    <div class="container twothirds">
+                                    <div class="container half">
                                         <h6>${plan.title}</h6>
                                     </div>  
-                                    <div class="button_bar container third right">
-                                        <div class="padded third">
-                                            <button v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i></button>
+                                    <div class="button_bar container half right">
+                                        <div class="padding third">
+                                            <button v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
                                         </div>
-                                        <div class="padded third">
-                                            <button v-on:click="edit_plan(plan.id)"><i class="fa fa-edit"></i></button>
+                                        <div class="padding third">
+                                            <button v-on:click="edit_plan(plan.id)"><i class="fa fa-edit"></i>Edit</button>
                                         </div>
-                                        <div class="padded third">
-                                            <button v-on:click="delete_plan(plan.id)"><i class="fa fa-trash"></i></button>
+                                        <div class="padding third">
+                                            <button v-on:click="delete_plan(plan.id)"><i class="fa fa-trash"></i>Delete</button>
                                         </div>
                                     </div>
                                     <div class="container">${plan.goals}</div>
@@ -147,15 +144,36 @@
                     </div>
                 </div>
             </div>
+
             <div class="half padded container">
                 <div class="plan_list_div">
-                    <div class="center"><h5>Followed Plans</h5></div>
                     <div class="container">
-                        <div  class="plan_list"> <!-- v-for=not now" -->
-                            <div class="plan_description">  
-                            </div>
-                            <div class="plan_info container">
-                                <div class="twothirds created_by"></div>
+                        <div class="my_plans half">
+                            <div class="left"><h5>Followed Plans</h5></div>
+                        </div>
+                        <div style="padding-top: 12px" class="third right">
+                            <button v-on:click="browse" class="btn rounded">Browse</button>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="container">
+                        <div v-for="plan in my_plans"> <!-- v-for=not now" -->
+                            <div class="plan_list">
+                                <div class="single_plan plan_description container padded">
+                                    <div class="container twothirds">
+                                        <h6>${plan.title}</h6>
+                                    </div>  
+                                    <div class="button_bar container third right">
+                                        <div class="third">
+                                            <button v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
+                                        </div>
+                                        <div class="third">
+                                            <button v-on:click="delete_plan(plan.id)"><i class="fa fa-eye-slash"></i>Unfollow</button>
+                                        </div>
+                                    </div>
+                                    <div class="container">${plan.goals}</div>
+                                </div>
+                                <h6> </h6>    
                             </div>
                         </div>
                     </div>
@@ -191,5 +209,4 @@
 
     </div>
 </div>
-
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
