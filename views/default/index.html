@@ -88,6 +88,8 @@
     var delete_plan_url = "{{=URL('api', 'delete_plan', user_signature=True)}}";
     var view_plan_url = "{{=URL('api', 'view_plan')}}";
     var browse_url = "{{=URL('api', 'browse')}}";
+    var follow_plan_url = "{{=URL('api', 'follow_plan', user_signature=True)}}";
+    var unfollow_plan_url = "{{=UR('api', 'unfollow_plan', user_signature=True)}}";
 </script>
 
 
@@ -297,7 +299,8 @@
                                         <button class="btn rounded" v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
                                     </div>
                                     <div class="third">
-                                        <button class="btn rounded" v-on:click=""><i class="fa fa-heart "></i>Follow</button>
+                                        <button class="btn rounded" v-if="!plan.is_followed" v-on:click="follow_plan(plan.id)"><i class="far fa-bell "></i>Follow</button>
+                                        <button class="btn rounded" v-if="plan.is_followed" v-on:click="unfollow_plan(plan.id)"><i class="far fa-bell-slash"></i>Unfollow</button>
                                     </div>
                                 </div>
                                 <div class="container">${plan.goals}</div>
