@@ -59,7 +59,7 @@ var app = function() {
                 }
             }
         );
-    }
+    };
     
     self.get_profile = function() {
         $.getJSON(get_profile_url,
@@ -112,14 +112,26 @@ var app = function() {
         var title = $('input#title_input').val();
         var goals = $('input#goals_input').val();
         var results = $('input#results_input').val();
-        var feedback = $('input#feedback_input').val();
+        var Sunday = $('input#Sunday_input').val();
+        var Monday = $('input#Monday_input').val();
+        var Tuesday = $('input#Tuesday_input').val();
+        var Wednesday = $('input#Wednesday_input').val();
+        var Thursday = $('input#Thursday_input').val();
+        var Friday = $('input#Friday_input').val();
+        var Saturday = $('input#Saturday_input').val();
 
         $.post(add_plan_url,
             {
                 title: title,
                 goals: goals,
                 results: results,
-                feedback: feedback
+                Sunday: Sunday,
+                Monday: Monday,
+                Tuesday: Tuesday,
+                Wednesday: Wednesday,
+                Thursday: Thursday,
+                Friday: Friday,
+                Saturday: Saturday
             },
             function(data) {
                 console.log(data);

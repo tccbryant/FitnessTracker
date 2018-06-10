@@ -69,6 +69,13 @@
         margin-top: 5px;
     }
 
+    .plan_left {
+        padding-left: 10% !important;
+    }
+
+    .plan_right {
+        padding-right: 10% !important;
+    }
 </style>
 
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
@@ -118,29 +125,31 @@
                         </div>
                     </div>
                     <hr/>
-                    <div class="container">
-                        <div v-for="plan in my_plans"> <!-- v-for=not now" -->
-                            <div class="plan_list">
-                                <div class="single_plan plan_description container padded">
-                                    <div class="container half">
-                                        <h6>${plan.title}</h6>
-                                    </div>  
-                                    <div class="button_bar container half right">
-                                        <div class="padding third">
-                                            <button v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
-                                        </div>
-                                        <div class="padding third">
-                                            <button v-on:click="edit_plan(plan.id)"><i class="fa fa-edit"></i>Edit</button>
-                                        </div>
-                                        <div class="padding third">
-                                            <button v-on:click="delete_plan(plan.id)"><i class="fa fa-trash"></i>Delete</button>
-                                        </div>
-                                    </div>
-                                    <div class="container">${plan.goals}</div>
-                                </div>
-                                <h6> </h6>    
+                    <div v-for="plan in my_plans">
+                        <div class="single_plan container padded">
+                            <div class="twothirds">
+                                <h6>${plan.title}</h6>
                             </div>
+                            <div class="button_bar container third right">
+                                <div class="padding third">
+                                    <button class="btn rounded" v-on:click="view_plan(plan.id)">
+                                        <i class="fa fa-eye"></i>View
+                                    </button>
+                                </div>
+                                <div class="padding third">
+                                    <button class="btn rounded" v-on:click="edit_plan(plan.id)">
+                                        <i class="fa fa-edit"></i>Edit
+                                    </button>
+                                </div>
+                                <div class="padding third">
+                                    <button class="btn rounded" v-on:click="delete_plan(plan.id)">
+                                        <i class="fa fa-trash"></i>Delete
+                                    </button>
+                                </div>
+                            </div>
+                            <div>${plan.goals}</div>
                         </div>
+                        <h6></h6>
                     </div>
                 </div>
             </div>
@@ -182,16 +191,46 @@
         </div>
 
         <div v-if="page == 'adding'" class="container">
-            Title
-            <input id="title_input" type="text">
-            Goals:
-            <input id="goals_input" type="text">
-            Expected results:
-            <input id="results_input" type="text">
-            Feedback:
-            <input id="feedback_input" type="text">
-            <button class="btn rounded" v-on:click="profile">Cancel</button>
-            <button class="btn rounded" v-on:click="add_plan">Submit</button>
+            <div class="half plan_left">
+                Title
+                <input id="title_input" type="text">
+                Goals:
+                <input id="goals_input" type="text">
+                Expected results:
+                <input id="results_input" type="text">
+                <button class="btn rounded" v-on:click="profile">Cancel</button>
+                <button class="btn rounded" v-on:click="add_plan">Submit</button>
+            </div>
+            <div class="half plan_right">
+                <div>
+                    Sunday
+                    <input id="Sunday_input" type="text">
+                </div>
+                <div>
+                    Monday
+                    <input id="Monday_input" type="text">
+                </div>
+                <div>
+                    Tuesday
+                    <input id="Tuesday_input" type="text">
+                </div>
+                <div>
+                    Wednesday
+                    <input id="Wednesday_input" type="text">
+                </div>
+                <div>
+                    Thursday
+                    <input id="Thursday_input" type="text">
+                </div>
+                <div>
+                    Friday
+                    <input id="Friday_input" type="text">
+                </div>
+                <div>
+                    Saturday
+                    <input id="Saturday_input" type="text">
+                </div>
+            </div>
         </div>
 
         <div v-if="page == 'editing'" class="container">
@@ -199,14 +238,50 @@
         </div>
 
         <div v-if="page == 'viewing'" class="container">
-            <h3>${open_plan.title}</h3>
-            <button class="btn rounded" v-on:click="profile">Exit</button>
+            <div class="half plan_left">
+                <h2>${open_plan.title}</h2>
+                <h4>Goals</h4>
+                ${open_plan.goals}
+                <h4>Expected Results</h4>
+                ${open_plan.results}
+                <br>
+                <button class="btn rounded" v-on:click="profile">Exit</button>
+            </div>
+            <div class="half plan_right">
+                <div>
+                    <h4>Sunday</h4>
+                    ${open_plan.Sunday}
+                </div>
+                <div>
+                    <h4>Monday</h4>
+                    ${open_plan.Monday}
+                </div>
+                <div>
+                    <h4>Tuesday</h4>
+                    ${open_plan.Tuesday}
+                </div>
+                <div>
+                    <h4>Wednesday</h4>
+                    ${open_plan.Wednesday}
+                </div>
+                <div>
+                    <h4>Thursday</h4>
+                    ${open_plan.Thursday}
+                </div>
+                <div>
+                    <h4>Friday</h4>
+                    ${open_plan.Friday}
+                </div>
+                <div>
+                    <h4>Saturday</h4>
+                    ${open_plan.Saturday}
+                </div>
+            </div>
         </div>
 
         <div v-if="page == 'browsing'" class="container">
             <button class="btn rounded" v-on:click="profile">Exit</button>
         </div>
-        a
 
     </div>
 </div>
