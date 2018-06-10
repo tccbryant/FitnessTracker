@@ -138,6 +138,15 @@ def browse():
 
     return response.json(dict(browse_plans=browse_plans))
 
+def follow_plan():
+    user = db(db.profiles.id == auth.user.id).select().first()
+    user.followed_plans.append(request.vars.plan_id)
+
+def unfollow_plan():
+    user = db(db.profiles.id == auth.user.id).select().first()
+    user.followed_plans.remove(request.vars.plan_id)
+
+
 #getallusers
 
 #getuser(id)
