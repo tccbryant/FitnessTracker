@@ -220,6 +220,20 @@ var app = function() {
         self.get_my_plans();
     };
 
+    self.follow_plan = function(plan_id) {
+          $.post(follow_plan_url,
+              {
+                  plan_id: plan_id
+              })
+    };
+
+    self.unfollow_plan = function(plan_id) {
+          $.post(unfollow_plan_url,
+              {
+                  plan_id: plan_id
+              })
+    };
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
@@ -249,7 +263,9 @@ var app = function() {
             viewing: self.viewing,
             browse: self.browse,
             edit_plan: self.edit_plan,
-            edit_complete: self.edit_complete
+            edit_complete: self.edit_complete,
+            follow_plan: self.follow_plan,
+            unfollow_plan: self.unfollow_plan
         }
 
     });
