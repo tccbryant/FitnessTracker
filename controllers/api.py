@@ -66,7 +66,14 @@ def add_plan():
         title=request.vars.title,
         goals=request.vars.goals,
         results=request.vars.results,
-        feedback=request.vars.feedback
+        feedback=request.vars.feedback,
+        Sunday=request.vars.Sunday,
+        Monday=request.vars.Monday,
+        Tuesday=request.vars.Tuesday,
+        Wednesday=request.vars.Wednesday,
+        Thursday=request.vars.Thursday,
+        Friday=request.vars.Friday,
+        Saturday=request.vars.Saturday
     )
 
     return response.json(dict(plan=plan))
@@ -102,7 +109,13 @@ def view_plan():
         title=plan.title,
         goals=plan.goals,
         results=plan.results,
-        feedback=plan.feedback
+        Sunday=plan.Sunday,
+        Monday=plan.Monday,
+        Tuesday=plan.Tuesday,
+        Wednesday=plan.Wednesday,
+        Thursday=plan.Thursday,
+        Friday=plan.Friday,
+        Saturday=plan.Saturday
     )
 
     return response.json(dict(open_plan=open_plan))
