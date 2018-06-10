@@ -167,6 +167,7 @@ var app = function() {
         $.getJSON(browse_url,
             function(data) {
                 self.vue.browse_plans = data.browse_plans;
+                self.vue.page = 'browsing';
             }
         )
     };

@@ -115,7 +115,7 @@ def browse():
     browse_plans = []
 
     for plan in plans:
-        user = db(db.auth_user.id == plan.owner_id).select()
+        user = db(db.auth_user.id == plan.owner_id).select().first()
         p = dict(
             first_name=user.first_name,
             last_name=user.last_name,

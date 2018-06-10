@@ -89,7 +89,7 @@
 <div class="main_content">
 
   <div id="vue-div" class="display:none">
-      <button class="btn rounded">Browse</button>
+      <button v-if="page != 'browsing'" v-on:click="browse" class="btn rounded">Browse</button>
 
         <div v-if="page=='profile'" class="profile_screen container">
             <div class="my_profile">
@@ -163,7 +163,7 @@
             </div>
         </div>
 
-        <div v-if="page=='adding'" class="container">
+        <div v-if="page == 'adding'" class="container">
             Title
             <input id="title_input" type="text">
             Goals:
@@ -175,6 +175,20 @@
             <button class="btn rounded" v-on:click="profile">Cancel</button>
             <button class="btn rounded" v-on:click="add_plan">Submit</button>
         </div>
+
+        <div v-if="page == 'editing'" class="container">
+            <button class="btn rounded" v-on:click="profile">Cancel</button>
+        </div>
+
+        <div v-if="page == 'viewing'" class="container">
+            <h3>${open_plan.title}</h3>
+            <button class="btn rounded" v-on:click="profile">Exit</button>
+        </div>
+
+        <div v-if="page == 'browsing'" class="container">
+            <button class="btn rounded" v-on:click="profile">Exit</button>
+        </div>
+
     </div>
 </div>
 
