@@ -114,10 +114,10 @@
                 <div class="plan_list_div">
                     <div class="container">
                         <div class="my_plans half">
-                            <h5>My Plans</h5>
+                            <div class="left"><h5>My Plans</h5></div>
                         </div>
-                        <div style="padding-top: 12px" class="third">
-                            <button class="btn rounded" v-on:click="adding_plan"><i class="fa fa-plus"></i></button>
+                        <div style="padding-top: 12px" class="third right">
+                            <button class="btn rounded" v-on:click="adding_plan">New Plan</button>
                         </div>
                     </div>
                     <hr/>
@@ -128,8 +128,7 @@
                                     <div class="container twothirds">
                                         <h6>${plan.title}</h6>
                                     </div>  
-                                    <div class="button_bar container third right
-                                    ">
+                                    <div class="button_bar container third right">
                                         <div class="padded third">
                                             <button v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i></button>
                                         </div>

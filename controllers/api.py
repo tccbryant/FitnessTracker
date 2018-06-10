@@ -96,7 +96,7 @@ def view_plan():
     open_plan = None
 
     for r in rows:
-        user = db(db.auth_user.id == r.owner_id).select()
+        user = db(db.auth_user.id == r.owner_id).select().first()
         open_plan = dict(
             first_name=user.first_name,
             last_name=user.last_name,
