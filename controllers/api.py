@@ -92,20 +92,18 @@ def delete_plan():
 
 
 def view_plan():
-    rows = db(db.fitness_plans.id == request.vars.plan_id).select()
-    open_plan = None
+    plan = db(db.fitness_plans.id == request.vars.plan_id).select().first()
+    user = db(db.auth_user.id == plan.owner_id).select().first()
 
-    for r in rows:
-        user = db(db.auth_user.id == r.owner_id).select().first()
-        open_plan = dict(
-            first_name=user.first_name,
-            last_name=user.last_name,
-            id=r.id,
-            title=r.title,
-            goals=r.goals,
-            results=r.results,
-            feedback=r.feedback
-        )
+    open_plan = dict(
+        first_name=user.first_name,
+        last_name=user.last_name,
+        id=plan.id,
+        title=plan.title,
+        goals=plan.goals,
+        results=plan.results,
+        feedback=plan.feedback
+    )
 
     return response.json(dict(open_plan=open_plan))
 

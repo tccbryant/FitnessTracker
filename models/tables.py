@@ -14,14 +14,6 @@ def get_user_email():
     return auth.user.email if auth.user else None
 
 
-db.define_table('schedule_day',
-                Field('plan_id'),
-                Field('title', 'text'),
-                Field('workouts', 'text'),
-                Field('meals', 'text'),
-                Field('misc', 'text'))
-
-
 db.define_table('fitness_plans',
                 Field('owner_id'),
                 Field('schedule', 'list:reference schedule_day'), #array of 'days' to hold the fitness schedule
@@ -29,7 +21,13 @@ db.define_table('fitness_plans',
                 Field('goals', 'text', default=""), #creator's intention on creating the plan
                 Field('results', 'text'),  # expected results from plan
                 Field('feedback', 'text'),  # journal of progress and results from plan
-                Field('is_archived', 'boolean')  # whether or not the creator is still editing the plan
+                Field('Sunday', 'text'),
+                Field('Monday', 'text'),
+                Field('Tuesday', 'text'),
+                Field('Wednesday', 'text'),
+                Field('Thursday', 'text'),
+                Field('Friday', 'text'),
+                Field('Saturday', 'text')
                 )
 
 
