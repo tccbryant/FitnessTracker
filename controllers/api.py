@@ -131,7 +131,8 @@ def browse():
             first_name=user.first_name,
             last_name=user.last_name,
             title=plan.title,
-            goals=plan.goals
+            goals=plan.goals,
+            id=plan.id
         )
         browse_plans.append(p)
 

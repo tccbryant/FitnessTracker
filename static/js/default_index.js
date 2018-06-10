@@ -101,6 +101,7 @@ var app = function() {
 
     self.profile = function() {
         self.vue.page = 'profile';
+        self.vue.is_browsing = false;
     };
 
     self.viewing = function() {
@@ -139,7 +140,7 @@ var app = function() {
         );
         self.profile();
         self.get_my_plans();
-        //Not calling.
+        //Not calling. 
     };
 
     self.get_my_plans = function() {
@@ -177,6 +178,7 @@ var app = function() {
     };
 
     self.browse = function() {
+        self.vue.is_browsing = true;
         $.getJSON(browse_url,
             function(data) {
                 self.vue.browse_plans = data.browse_plans;
@@ -231,7 +233,7 @@ var app = function() {
             followed_plans: [],
             browse_plans: [],
             profile_loaded: false,
-            
+            is_browsing: false    
 
         },
         methods: {

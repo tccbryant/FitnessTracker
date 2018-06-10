@@ -248,7 +248,8 @@
                 <h4>Expected Results</h4>
                 ${open_plan.results}
                 <br>
-                <button class="btn rounded" v-on:click="profile">Exit</button>
+                <button v-if="!is_browsing" class="btn rounded" v-on:click="profile">Exit</button>
+                <button v-if="is_browsing" class="btn rounded" v-on:click="browse">Exit</button>
             </div>
             <div class="half plan_right">
                 <div>
@@ -283,9 +284,9 @@
         </div>
 
         <div v-if="page == 'browsing'" class="container">
-            <div class="plan_list_div">
-                <div class="container">
-                    <div v-for="plan in my_plans"> <!-- v-for=not now" -->
+            <div class="container half plan_list_div">
+                <div class="container center padded">
+                    <div v-for="plan in browse_plans"> <!-- v-for=not now" -->
                         <div class="plan_list">
                             <div class="single_plan plan_description container padded">
                                 <div class="container twothirds">
@@ -304,11 +305,11 @@
                             <h6> </h6>    
                         </div>
                     </div>
+                    <button class="btn rounded" v-on:click="profile">Exit</button>
                 </div>
-            <button class="btn rounded" v-on:click="profile">Exit</button>
             <!--making is browsing bool so that when you return from viewing, you go back to browsing.-->
+            </div>
         </div>
-
     </div>
 </div>
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
