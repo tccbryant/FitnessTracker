@@ -139,6 +139,8 @@ var app = function() {
     };
 
     self.delete_plan = function(plan_id) {
+        console.log(plan_id);
+
         $.post(delete_plan_url,
             {
                 plan_id: plan_id
@@ -226,7 +228,7 @@ var app = function() {
             profile: self.profile,
             get_my_plans: self.get_my_plans,
             log_in: self.log_in,
-            delete_plans: self.delete_plan,
+            delete_plan: self.delete_plan,
             view_plan: self.view_plan,
             viewing: self.viewing,
             browse: self.browse,

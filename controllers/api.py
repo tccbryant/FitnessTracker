@@ -78,6 +78,7 @@ def get_my_plans():
 
     for plan in plans:
         p = dict(
+            id=plan.id,
             title=plan.title,
             goals=plan.goals
         )
