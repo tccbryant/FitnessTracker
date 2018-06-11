@@ -154,6 +154,18 @@ def unfollow_plan():
     profile = db(db.profiles.user_id == auth.user.id).select().first()
     profile.followed_plans.remove(request.vars.plan_id)
 
+def get_followed_plans():
+    profile = db(db.profiles.user_id == auth.user.id).select().first()
+    followed_plans = []
+    for plans in profile.followed_plans:
+        plan = db(db.fitness_plans.owner_id == plans).select().first()
+        p = dict(
+            plan_id=plans,
+            title=plan.title,
+            goals=plan.goals
+        )
+        followed_plans.append(p)
+    return response.json(dict(followed_plans=followed_plans))
 
 #getallusers
 
