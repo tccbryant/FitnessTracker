@@ -229,6 +229,11 @@ var app = function() {
                   plan_id: plan_id
               });
         self.get_followed_plans();
+        if (self.vue.is_browsing) {
+            setTimeout(function() {
+                self.browse();
+            }, 50);
+        } 
     };
 
     self.unfollow_plan = function(plan_id) {
@@ -237,6 +242,11 @@ var app = function() {
                   plan_id: plan_id
               });
         self.get_followed_plans();
+        if (self.vue.is_browsing) {
+            setTimeout(function() {
+                self.browse();
+            }, 50);
+        } 
     };
 
     self.get_followed_plans = function() {
