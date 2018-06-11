@@ -160,13 +160,18 @@ def follow_plan():
 
 def unfollow_plan():
     profile = db(db.profiles.user_id == auth.user.id).select().first()
-    profile.followed_plans.remove(request.vars.plan_id)
+    followed = profile.followed_plans
+    followed.remove(request.vars.plan_id)
+    
+    profile.update_record(
+        followed_plans=followed
+    )
 
 def get_followed_plans():
     profile = db(db.profiles.user_id == auth.user.id).select().first()
     followed_plans = []
     for plans in profile.followed_plans:
-        plan = db(db.fitness_plans.owner_id == plans).select().first()
+        plan = db(db.fitness_plans.id == plans).select().first()
         print(plan)
         p = dict(
             plan_id=plans,
