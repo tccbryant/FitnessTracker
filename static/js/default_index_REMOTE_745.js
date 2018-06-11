@@ -222,11 +222,7 @@ var app = function() {
     };
 
     self.follow_plan = function(plan_id) {
-<<<<<<< HEAD
-            console.log("Following Plan")
-=======
         console.log(plan_id);
->>>>>>> 96346143df7d438ad01546a82dbc67a197d2b5ed
           $.post(follow_plan_url,
               {
                   plan_id: plan_id
