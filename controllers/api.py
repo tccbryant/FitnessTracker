@@ -20,17 +20,9 @@ def get_profile():
 
     for p in profiles:
         if int(p.user_id) == int(auth.user.id):
-            if p.active_plan is None:
-                goals = "No active plan."
-                cur_plan = None
-            else:
-                goals = p.active_plan.goals
-                cur_plan = p.active_plan.id
             profile = dict(
                 height=p.height,
-                weight=p.weight,
-                goals=goals,
-                cur_plan=cur_plan
+                weight=p.weight
             )
 
     if profile is None:
@@ -39,9 +31,7 @@ def get_profile():
         )
         profile = dict(
             height=newp.height,
-            weight=newp.weight,
-            goals="No active plan.",
-            cur_plan=None
+            weight=newp.weight
         )
 
     return response.json(dict(profile=profile))
@@ -196,6 +186,26 @@ def edit_plan():
         Friday=request.vars.Friday,
         Saturday=request.vars.Saturday
     )
+
+def set_current_plan():
+    profile = db(db.profiles.user_id == auth.user.id).select().first()
+    profile.update_record(active_plan = request.vars.plan_id)
+
+def get_current_plan():
+    profile = db(db.profiles.user_id == auth.user.id).select().first()
+    if profile.active_plan is not None:
+        cur_plan = db(db.fitness_plans.id == profile.active_plan).select().first()
+        plan = dict(
+            id = cur_plan.id,
+            goals = cur_plan.goals
+        )
+    else:
+        plan = dict(
+            id = -1,
+            goals = "No active plan. Try following or adding a plan to set an active plan."
+        )
+    return response.json(dict(plan = plan))
+
 
 #getallusers
 

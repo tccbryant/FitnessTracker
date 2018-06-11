@@ -55,6 +55,7 @@ var app = function() {
                 if (data.logged_in) {
                     self.vue.page = 'profile';
                     self.get_profile();
+                    self.get_current_plan();
                     self.get_my_plans();
                     self.get_followed_plans();
                 }
@@ -181,7 +182,7 @@ var app = function() {
 
     self.browse = function() {
         self.vue.is_browsing = true;
-        $.getJSON(browse_url,
+        $.getJSON(browse_url,   
             function(data) {
                 self.vue.browse_plans = data.browse_plans;
                 self.vue.page = 'browsing';
@@ -217,7 +218,9 @@ var app = function() {
             }
         );
         self.profile();
-        self.get_my_plans();
+        setTimeout(function() {
+            self.get_my_plans();
+        }, 100);
     };
 
     self.follow_plan = function(plan_id) {
@@ -256,6 +259,25 @@ var app = function() {
         )
     };
 
+    self.set_current_plan = function(plan_id) {
+        $.post(set_current_plan_url,
+            {
+                plan_id: plan_id
+            },
+            function() {
+                self.get_current_plan();
+            }
+        );
+    };
+
+    self.get_current_plan = function () {
+        $.getJSON(get_current_plan_url,
+            function(data) {
+                self.vue.current_plan = data.plan
+            }
+        );
+    }
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
@@ -269,7 +291,8 @@ var app = function() {
             followed_plans: [],
             browse_plans: [],
             profile_loaded: false,
-            is_browsing: false    
+            is_browsing: false, 
+            current_plan: null  
 
         },
         methods: {
@@ -288,7 +311,9 @@ var app = function() {
             edit_plan: self.edit_plan,
             edit_complete: self.edit_complete,
             follow_plan: self.follow_plan,
-            unfollow_plan: self.unfollow_plan
+            unfollow_plan: self.unfollow_plan,
+            get_current_plan: self.get_current_plan,
+            set_current_plan: self.set_current_plan
         }
 
     });

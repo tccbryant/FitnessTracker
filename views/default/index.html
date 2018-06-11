@@ -92,6 +92,8 @@
     var browse_url = "{{=URL('api', 'browse')}}";
     var follow_plan_url = "{{=URL('api', 'follow_plan', user_signature=True)}}";
     var unfollow_plan_url = "{{=URL('api', 'unfollow_plan', user_signature=True)}}";
+    var set_current_plan_url = "{{=URL('api', 'set_current_plan', user_signature=True)}}";
+    var get_current_plan_url = "{{=URL('api', 'get_current_plan', user_signature=True)}}";
 </script>
 
 
@@ -111,10 +113,10 @@
                         <div class="stat">
                             Weight: <input v-model="user_profile.weight" v-on:blur="edit_profile" type="number">
                         </div>
-                        <div class="center"><span class="cur_plan center">Current Plan</span></div>
+                        <button class="center" v-if="current_plan.id > 0" v-on:click="view_plan(current_plan.id)">Current Plan</button>
                     </div>
                     <div class="profile_goals half">
-                      Goals: ${user_profile.goals}
+                      Goals: ${current_plan.goals}
                     </div>
                 </div>
             </div>
@@ -291,6 +293,7 @@
                 <br>
                 <button v-if="!is_browsing" class="btn rounded" v-on:click="profile">Exit</button>
                 <button v-if="is_browsing" class="btn rounded" v-on:click="browse">Exit</button>
+                <button v-if="!is_browsing && open_plan.id != current_plan.id" class="btn rounded" v-on:click="set_current_plan(open_plan.id)">Set as Active</button>
             </div>
             <div class="half plan_right">
                 <div>
