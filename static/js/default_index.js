@@ -201,21 +201,19 @@ var app = function() {
     };
 
     self.edit_complete = function() {
-        var title = $('input#editing_title').val();
-        var goals = $('input#editing_goals').val();
-        var results = $('input#editing_results').val();
-        var feedback = $('input#editing_feedback').val();
-
         $.post(edit_plan_url,
             {
                 plan_id: self.vue.open_plan.id,
-                title: title,
-                goals: goals,
-                results: results,
-                feedback: feedback
-            },
-            function(data) {
-
+                title: self.vue.open_plan.title,
+                goals: self.vue.open_plan.goals,
+                results: self.vue.open_plan.results,
+                Sunday: self.vue.open_plan.Sunday,
+                Monday: self.vue.open_plan.Monday,
+                Tuesday: self.vue.open_plan.Tuesday,
+                Wednesday: self.vue.open_plan.Wednesday,
+                Thursday: self.vue.open_plan.Thursday,
+                Friday: self.vue.open_plan.Friday,
+                Saturday: self.vue.open_plan.Saturday
             }
         );
         self.profile();

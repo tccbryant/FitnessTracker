@@ -85,6 +85,7 @@
     var add_plan_url = "{{=URL('api', 'add_plan', user_signature=True)}}";
     var get_my_plans_url = "{{=URL('api', 'get_my_plans', user_signature=True)}}";
     var get_followed_plans_url = "{{=URL('api', 'get_followed_plans')}}";
+    var edit_plan_url = "{{=URL('api', 'edit_plan', user_signature=True)}}";
     var log_in_url = "{{=URL('api', 'log_in')}}";
     var delete_plan_url = "{{=URL('api', 'delete_plan', user_signature=True)}}";
     var view_plan_url = "{{=URL('api', 'view_plan')}}";
@@ -238,9 +239,46 @@
 
         <div v-if="page == 'editing'" class="container">
             <div class="half plan_left">
-                <!--Insert V-Models Here?-->
+                <h2>Title</h2>
+                <input v-model="open_plan.title">
+                <h4>Goals</h4>
+                <textarea v-model="open_plan.goals" :rows="10"></textarea>
+                <h4>Expected Results</h4>
+                <textarea v-model="open_plan.results" :rows="10"></textarea>
+                <h3></h3>
+                <button class="btn rounded" v-on:click="edit_complete">Submit</button>
+                <button class="btn rounded" v-on:click="profile">Exit</button>
             </div>
-            <button class="btn rounded" v-on:click="profile">Cancel</button>
+            <div class="half plan_right">
+                <div>
+                    <h4>Sunday</h4>
+                    <textarea v-model="open_plan.Sunday" :rows="5"></textarea>
+                </div>
+                <div>
+                    <h4>Monday</h4>
+                    <textarea v-model="open_plan.Monday" :rows="5"></textarea>
+                </div>
+                <div>
+                    <h4>Tuesday</h4>
+                    <textarea v-model="open_plan.Tuesday" :rows="5"></textarea>
+                </div>
+                <div>
+                    <h4>Wednesday</h4>
+                    <textarea v-model="open_plan.Wednesday" :rows="5"></textarea>
+                </div>
+                <div>
+                    <h4>Thursday</h4>
+                    <textarea v-model="open_plan.Thursday" :rows="5"></textarea>
+                </div>
+                <div>
+                    <h4>Friday</h4>
+                    <textarea v-model="open_plan.Friday" :rows="5"></textarea>
+                </div>
+                <div>
+                    <h4>Saturday</h4>
+                    <textarea v-model="open_plan.Saturday" :rows="5"></textarea>
+                </div>
+            </div>
         </div>
 
         <div v-if="page == 'viewing'" class="container">

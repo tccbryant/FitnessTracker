@@ -180,6 +180,23 @@ def get_followed_plans():
         followed_plans.append(p)
     return response.json(dict(followed_plans=followed_plans))
 
+
+def edit_plan():
+    plan = db(db.fitness_plans.id == request.vars.plan_id).select().first()
+
+    plan.update_record(
+        title=request.vars.title,
+        goals=request.vars.goals,
+        results=request.vars.results,
+        Sunday=request.vars.Sunday,
+        Monday=request.vars.Monday,
+        Tuesday=request.vars.Tuesday,
+        Wednesday=request.vars.Wednesday,
+        Thursday=request.vars.Thursday,
+        Friday=request.vars.Friday,
+        Saturday=request.vars.Saturday
+    )
+
 #getallusers
 
 #getuser(id)
