@@ -141,6 +141,7 @@ var app = function() {
         );
         self.profile();
         self.get_my_plans();
+        self.get_followed_plans();
         //Not calling. 
     };
 
@@ -222,28 +223,27 @@ var app = function() {
     };
 
     self.follow_plan = function(plan_id) {
-<<<<<<< HEAD
-            console.log("Following Plan")
-=======
         console.log(plan_id);
->>>>>>> 96346143df7d438ad01546a82dbc67a197d2b5ed
           $.post(follow_plan_url,
               {
                   plan_id: plan_id
-              })
+              });
+        self.get_followed_plans();
     };
 
     self.unfollow_plan = function(plan_id) {
           $.post(unfollow_plan_url,
               {
                   plan_id: plan_id
-              })
+              });
+        self.get_followed_plans();
     };
 
     self.get_followed_plans = function() {
         $.getJSON(get_followed_plans_url,
             function(data) {
                 self.vue.followed_plans=data.followed_plans;
+                console.log(self.vue.followed_plans);
             }
         )
     };
@@ -271,6 +271,7 @@ var app = function() {
             adding_plan: self.adding_plan,
             profile: self.profile,
             get_my_plans: self.get_my_plans,
+            get_followed_plans: self.get_followed_plans,
             log_in: self.log_in,
             delete_plan: self.delete_plan,
             view_plan: self.view_plan,
