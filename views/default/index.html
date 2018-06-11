@@ -176,10 +176,10 @@
                                     </div>  
                                     <div class="button_bar container third right">
                                         <div class="third">
-                                            <button class="btn rounded" v-on:click="view_plan(plan.id)"><i class="fa fa-eye"></i>View</button>
+                                            <button class="btn rounded" v-on:click="view_plan(plan.plan_id)"><i class="fa fa-eye"></i>View</button>
                                         </div>
                                         <div class="third">
-                                            <button class="btn rounded" v-on:click="delete_plan(plan.id)"><i class="fa fa-eye-slash"></i>Unfollow</button>
+                                            <button class="btn rounded" v-on:click="unfollow_plan(plan.plan_id)"><i class="fa fa-eye-slash"></i>Unfollow</button>
                                         </div>
                                     </div>
                                     <div class="container">${plan.goals}</div>

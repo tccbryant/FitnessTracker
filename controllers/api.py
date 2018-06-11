@@ -150,7 +150,7 @@ def browse():
 def follow_plan():
     profile = db(db.profiles.user_id == auth.user.id).select().first()
     followed = profile.followed_plans
-    followed.append(request.vars.plan_id)
+    followed.append(int(request.vars.plan_id))
 
     profile.update_record(
         followed_plans=followed
@@ -161,7 +161,7 @@ def follow_plan():
 def unfollow_plan():
     profile = db(db.profiles.user_id == auth.user.id).select().first()
     followed = profile.followed_plans
-    followed.remove(request.vars.plan_id)
+    followed.remove(int(request.vars.plan_id))
     
     profile.update_record(
         followed_plans=followed
@@ -172,7 +172,6 @@ def get_followed_plans():
     followed_plans = []
     for plans in profile.followed_plans:
         plan = db(db.fitness_plans.id == plans).select().first()
-        print(plan)
         p = dict(
             plan_id=plans,
             title=plan.title,
