@@ -56,6 +56,7 @@ var app = function() {
                     self.vue.page = 'profile';
                     self.get_profile();
                     self.get_my_plans();
+                    self.get_followed_plans();
                 }
             }
         );
@@ -221,6 +222,7 @@ var app = function() {
     };
 
     self.follow_plan = function(plan_id) {
+        console.log(plan_id);
           $.post(follow_plan_url,
               {
                   plan_id: plan_id
