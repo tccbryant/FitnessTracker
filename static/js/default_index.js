@@ -221,6 +221,7 @@ var app = function() {
     };
 
     self.follow_plan = function(plan_id) {
+            console.log("Following Plan")
           $.post(follow_plan_url,
               {
                   plan_id: plan_id
