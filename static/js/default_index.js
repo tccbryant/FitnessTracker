@@ -234,6 +234,14 @@ var app = function() {
               })
     };
 
+    self.get_followed_plans = function() {
+        $.getJSON(get_followed_plans_url,
+            function(data) {
+                self.vue.followed_plans=data.followed_plans;
+            }
+        )
+    };
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
